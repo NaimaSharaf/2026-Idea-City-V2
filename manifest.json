@@ -4,7 +4,25 @@
   "version": "1.0.0",
   "minimum_chrome_version": "114",
   "description": "Keep a library of ideas with tags and links, and watch them float as astronauts aboard a space station.",
-  "permissions": ["storage"],
-  "action": { "default_title": "Open Idea City" },
-  "background": { "service_worker": "background.js" }
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "Open Idea City",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
 }
