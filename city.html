@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Idea City · Station</title><link rel="stylesheet" href="city.css"></head><body>
+<aside id="side">
+ <h1>Station</h1><p class="small" style="margin-top:-6px">Every idea is an astronaut. Modules dock to the Observation Deck; linked ideas talk over radio beams.</p>
+ <div class="row"><button id="open" class="primary">Open library folder</button><button id="reconnect" hidden>Reconnect folder</button></div>
+ <details><summary>Open session.json read-only</summary><input id="json" type="file" accept=".json"><p class="small">Layout and walls won't be saved in this mode.</p></details>
+ <p id="status" role="status"></p>
+ <h2>Tools</h2>
+ <div class="tools" role="toolbar">
+  <button data-tool="select" class="on" title="V">Select / move ideas</button>
+  <button data-tool="wall" title="W">Build wall</button>
+  <button data-tool="erase" title="E">Erase wall</button>
+  <button data-tool="move" title="M">Move module</button>
+ </div>
+ <p class="small" id="hint"></p>
+ <div class="two">
+  <label class="small">Radio beams<select id="beams"><option value="all">All links</option><option value="selected">Selected idea only</option><option value="off">Off</option></select></label>
+  <label class="small">Speech bubbles<select id="bubbles"><option value="turns">Take turns</option><option value="always">Always show</option><option value="off">Hover / click only</option></select></label>
+ </div>
+ <h2>Crew activity</h2>
+ <p id="phase" class="small phase"></p>
+ <label class="small" for="meet">Linked ideas meet at the Observation Deck</label>
+ <select id="meet"><option value="auto">Automatically, every 2 minutes</option><option value="now">Now, until I change this</option><option value="off">Never</option></select>
+ <div class="row" style="margin:8px 0"><button id="gather" class="callhome">🔭 Everyone to the Observation Deck</button><button id="visit-deck">Visit the Deck</button></div>
+ <p class="small">Each module puts one idea in the spotlight at its console for 30 seconds; the mission board shows it. The others work at their desks or float around the module.</p>
+ <h2>Tags</h2>
+ <div id="tags" class="tagrow"><p class="small">Tags you add in Entries appear here. Click one to light up its astronauts.</p></div>
+ <h2>Modules</h2>
+ <form id="new-town" class="newtown"><input id="new-town-name" placeholder="New module name" aria-label="New module name" maxlength="80"><button class="primary">Dock module</button></form>
+ <div id="towns"><p class="small">Open your ideas folder (or pick it in Entries) to build the station.</p></div>
+ <button id="clear-walls" class="danger">Remove all walls</button>
+</aside>
+<main><canvas id="map"></canvas>
+ <section id="card" hidden>
+  <button id="card-close" class="x" aria-label="Close">×</button>
+  <h2 id="card-name"></h2><p id="card-meta" class="small"></p>
+  <div id="card-tags" class="tagrow"></div>
+  <p id="card-text"></p>
+  <div id="card-links"></div>
+ </section>
+ <div id="ctx" class="ctxmenu" hidden></div>
+ <div id="zoom"><button id="zin">+</button><button id="zout">−</button><button id="fit">Fit</button></div>
+</main>
+<script src="library.js"></script><script src="sync.js"></script><script src="city.js"></script></body></html>

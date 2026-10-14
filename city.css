@@ -1,0 +1,35 @@
+:root{font:15px/1.5 system-ui,sans-serif;color:#dfe6ff;background:#07071a;--cyan:#5ef2ff;--panel:#11143a;--line:#2b3170}*{box-sizing:border-box}
+body{margin:0;display:flex;height:100vh;overflow:hidden;background:#07071a}
+#side{width:320px;flex:none;overflow:auto;padding:16px;border-right:1px solid var(--line);background:linear-gradient(180deg,#0e1033,#07071a)}
+h1{font-size:24px;margin:0 0 10px;letter-spacing:.04em;color:#fff;text-shadow:0 0 12px #5ef2ff88}h2{font-size:13px;margin:18px 0 8px;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan)}
+.small{font-size:13px;color:#9aa3c7}#status{color:#ffd166;min-height:20px;font-size:13px;overflow-wrap:anywhere}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:7px 11px;background:var(--panel);color:#dfe6ff}
+button:hover{border-color:var(--cyan);box-shadow:0 0 8px #5ef2ff44}.primary{background:#5ef2ff;color:#07071a;border-color:#5ef2ff;font-weight:600}.primary:hover{background:#8ff6ff}
+.danger{margin-top:14px;color:#ff8597;border-color:#5a2337}
+.row{display:flex;flex-wrap:wrap;gap:8px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.tools .on{background:#5ef2ff;color:#07071a;border-color:#5ef2ff;font-weight:600}
+details{margin:10px 0;font-size:13px;color:#9aa3c7}
+.town{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px;margin:0 0 8px}
+input,select{font:inherit;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;color:#fff;background:#07071a}
+.town input{font-weight:600}input:focus,select:focus{outline:2px solid var(--cyan);outline-offset:1px}select{margin-top:4px}
+.town .top{display:flex;gap:8px;align-items:center}.dot{width:14px;height:14px;border-radius:50%;flex:none;box-shadow:0 0 8px currentColor}
+.town .row{margin-top:6px}.town button{padding:4px 9px;font-size:13px}
+.town .now{font-size:13px;margin-top:4px;color:#ffd166}
+main{flex:1;position:relative}canvas{display:block;width:100%;height:100%;touch-action:none}
+#card{position:absolute;right:16px;top:16px;width:min(420px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;background:#0e1033ee;border:1px solid var(--cyan);border-radius:12px;padding:16px;box-shadow:0 0 30px #5ef2ff33;backdrop-filter:blur(6px)}
+#card h2{margin:0 30px 2px 0;font-size:20px;text-transform:none;letter-spacing:0;color:#fff}
+#card-text{white-space:pre-wrap;font-size:14px}.x{position:absolute;right:10px;top:8px;border:none;font-size:22px;padding:0 8px;background:none}
+#card-links h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin:12px 0 6px}
+.linkbtn{display:block;width:100%;text-align:left;margin:0 0 6px;padding:6px 10px;font-size:14px}.linkbtn small{color:#9aa3c7}
+#zoom{position:absolute;left:16px;bottom:16px;display:flex;gap:6px}
+[hidden]{display:none!important}
+.newtown{display:flex;gap:6px;margin:0 0 10px}.newtown input{flex:1}.newtown button{flex:none}
+.phase{color:#ffd166;margin:4px 0 8px}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tag{font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:#07071a}.tag .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.tag.on{border-color:var(--cyan);background:#5ef2ff22;color:#fff}
+.ctxmenu{position:absolute;z-index:20;min-width:230px;max-width:300px;max-height:70%;overflow:auto;background:#0e1033f2;border:1px solid var(--cyan);border-radius:10px;padding:8px;box-shadow:0 0 24px #5ef2ff33;backdrop-filter:blur(6px)}
+.ctx-title{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);padding:4px 6px 8px}
+.ctx-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:none;background:none;padding:7px 8px}.ctx-item:hover:not(:disabled){background:#1b2160;box-shadow:none}.ctx-item:disabled{opacity:.5;cursor:default}
+.ctx-new{display:flex;gap:6px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line)}.ctx-new input{flex:1;min-width:0}.ctx-new button{flex:none;padding:5px 9px;font-size:13px}
+.callhome{flex:1;font-weight:600;border-color:#ffd166;color:#ffd166}.callhome.on{background:#ffd166;color:#07071a;border-color:#ffd166}

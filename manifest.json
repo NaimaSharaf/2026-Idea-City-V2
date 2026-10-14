@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Idea City",
+  "version": "1.0.0",
+  "minimum_chrome_version": "114",
+  "description": "Keep a library of ideas with tags and links, and watch them float as astronauts aboard a space station.",
+  "permissions": ["storage"],
+  "action": { "default_title": "Open Idea City" },
+  "background": { "service_worker": "background.js" }
+}

@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Idea City · Entries</title><link rel="stylesheet" href="entries.css"></head><body>
+<div class="wrap">
+ <div class="bar">
+  <button id="folder" class="primary">Open library folder</button>
+  <button id="reconnect" hidden>Reconnect folder</button>
+  <button id="save">Sync now</button>
+  <button id="to-city">View on Station →</button>
+  <span id="lib-name" class="pill" hidden></span>
+ </div>
+ <p id="status" role="status" aria-live="polite"></p>
+ <section id="conflicts" hidden></section>
+
+ <section id="resume" class="resume" hidden><h2>Welcome back</h2><p>Click anywhere to reopen <b id="resume-name"></b>.</p><button class="primary">Open last library</button></section>
+ <section id="empty">
+  <h2>Start your ideas library</h2>
+  <p>Click <b>Open library folder</b> and choose a new, empty folder (for example <code>Ideas</code>). Idea City keeps its own folder, separate from your Citations and Presentations libraries. Pick the same folder later to keep adding.</p>
+ </section>
+
+ <div id="work" hidden>
+  <section class="add">
+   <h2>Add an idea</h2>
+   <form id="add-form" class="grid">
+    <label class="span2">Idea<input id="f-title" maxlength="300" required placeholder="e.g. Use lipoprotein gels as drug depots"></label>
+    <label>Module<select id="f-house"></select></label>
+    <label class="span2">Tags <span class="small">(comma separated)</span><input id="f-tags" maxlength="300" placeholder="e.g. hydrogel, grant, imaging"></label>
+    <label>Link to<select id="f-link"></select></label>
+    <div class="wide tagpick" id="tag-pick"></div>
+    <label class="wide">Notes <span class="small">(one thought per line; the astronaut says them in turn)</span><textarea id="f-notes" rows="3" placeholder="Why it matters&#10;First experiment&#10;Who could help"></textarea></label>
+    <div class="wide row"><button class="primary">Add idea</button><span class="small">Shortcut: Ctrl+Enter inside the form</span></div>
+   </form>
+  </section>
+
+  <section>
+   <div class="row between">
+    <h2>Station modules</h2>
+    <form id="house-form" class="row"><input id="house-name" placeholder="New module" maxlength="80" aria-label="New module name"><button>Add module</button></form>
+   </div>
+   <input id="search" type="search" placeholder="Search ideas, tags, notes, modules…" aria-label="Search ideas">
+   <div id="filters" class="tagpick"></div>
+   <div id="list"></div>
+  </section>
+ </div>
+ <details><summary>Open session.json read-only</summary><p class="small">View a library without folder access. Edits are disabled.</p><input id="json" type="file" accept=".json"></details>
+</div>
+<script src="library.js"></script><script src="sync.js"></script><script src="entries.js"></script>
+</body></html>

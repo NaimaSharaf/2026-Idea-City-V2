@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Idea City</title>
+<style>
+:root{font:15px/1.5 system-ui,sans-serif;color:#dfe6ff;background:#07071a}*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#07071a}
+header{height:52px;display:flex;align-items:center;gap:16px;padding:0 16px;border-bottom:1px solid #2b3170;background:linear-gradient(90deg,#0e1033,#07071a)}
+.brand{font-weight:700;font-size:18px;letter-spacing:.04em;color:#fff;text-shadow:0 0 12px #5ef2ff88}
+.switch{display:flex;background:#11143a;border:1px solid #2b3170;border-radius:9px;padding:3px}
+.switch button{font:inherit;cursor:pointer;border:none;border-radius:7px;padding:6px 16px;background:none;color:#dfe6ff}
+.switch button[aria-selected=true]{background:#5ef2ff;color:#07071a;font-weight:600}
+.switch button:focus-visible{outline:2px solid #5ef2ff;outline-offset:2px}
+.hint{font-size:13px;color:#9aa3c7;margin-left:auto}
+#views{position:relative;height:calc(100% - 52px)}
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#07071a}
+/* visibility (not display:none) keeps the station canvas sized while hidden */
+iframe.off{visibility:hidden;pointer-events:none}
+</style></head><body>
+<header>
+ <span class="brand">💡 Idea City</span>
+ <div class="switch" role="tablist" aria-label="View">
+  <button role="tab" data-view="entries" aria-selected="true">Entries</button>
+  <button role="tab" data-view="city" aria-selected="false">Station</button>
+ </div>
+ <span class="hint"><b>Ctrl+Shift+S</b> switches views</span>
+</header>
+<div id="views">
+ <iframe id="entries" src="entries.html" title="Entries"></iframe>
+ <iframe id="city" src="city.html" title="Station" class="off"></iframe>
+</div>
+<script src="app.js"></script>
+</body></html>
