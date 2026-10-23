@@ -12,6 +12,7 @@ globalThis.Library=(()=>{
    if(typeof row.keyword!=='string'||typeof row.sentence!=='string'||typeof row.link!=='string')throw Error('Invalid row.');
    if(row.link&&!/^https?:\/\//i.test(row.link))throw Error('Links must start with http:// or https://.');
    if(row.screenshot&&!/^images\/[a-zA-Z0-9_-]+\.(png|jpg|webp)$/.test(row.screenshot))throw Error('Invalid screenshot path.');
+   if(row.images!==undefined&&(!Array.isArray(row.images)||row.images.length>100||row.images.some(p=>typeof p!=='string'||!/^images\/[a-zA-Z0-9_-]+\.(png|jpg|webp)$/.test(p))))throw Error('Invalid screenshot list.');
   }
   return data;
  }

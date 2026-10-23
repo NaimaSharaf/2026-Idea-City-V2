@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Idea City",
-  "version": "1.0.0",
-  "minimum_chrome_version": "114",
-  "description": "Keep a library of ideas with tags and links, and watch them float as astronauts aboard a space station.",
+  "version": "1.1.0",
+  "minimum_chrome_version": "116",
+  "description": "Capture ideas (and papers with link, screenshot, BibTeX) in the side panel, organise them into modules, and watch them float as astronauts aboard a space station.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -11,10 +11,15 @@
     "128": "icons/icon128.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "sidePanel",
+    "tabs",
+    "scripting",
+    "activeTab",
+    "contextMenus"
   ],
   "action": {
-    "default_title": "Open Idea City",
+    "default_title": "Open Idea City side panel (right-click for viewer and Station)",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
@@ -24,5 +29,13 @@
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "optional_host_permissions": [
+    "<all_urls>",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "side_panel": {
+    "default_path": "panel.html"
   }
 }

@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Idea City · Side panel</title><link rel="stylesheet" href="entries.css"><link rel="stylesheet" href="panel.css"></head><body>
+<header><span class="brand">💡 Idea City</span><span id="lib" class="pill" hidden></span></header>
+<div class="row"><button id="folder" class="primary">Choose library folder</button><button id="reconnect" class="primary" hidden>Reconnect folder</button><button id="sync">Sync now</button></div>
+<div class="row"><button id="open-viewer" title="Open the Entries viewer in a tab">Open viewer</button><button id="open-station" title="Open the Station in a tab">Open Station 🚀</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+<p id="intro" class="small">Choose the same folder you use in Idea City (or a new, empty one). Ideas you write here sync with the viewer and the Station.</p>
+
+<div id="work" hidden>
+ <label for="entry">Current idea</label>
+ <div class="row nowrap"><select id="entry"></select><button id="new" class="primary" title="New idea in the module chosen below">＋ New</button></div>
+ <div class="row"><button id="paper" class="primary" title="Save the page you are on as a paper: its title, link and a screenshot">📄 Add paper from this page</button></div>
+ <form id="mod-form" class="row nowrap"><input id="mod-name" maxlength="80" placeholder="New module name" aria-label="New module name"><button title="Dock a new module to the station">＋ Add module</button></form>
+
+ <section id="editor" hidden>
+  <label>Idea<input id="title" maxlength="300" placeholder="Name this idea"></label>
+  <div class="two">
+   <label>Module<select id="module"></select></label>
+   <label>Tags<input id="tags" maxlength="300" placeholder="hydrogel, grant"></label>
+  </div>
+  <div id="paper-box" class="paper" hidden>
+   <label>Link<input id="link" type="url" maxlength="2000" placeholder="https://…"></label>
+   <div class="row"><button id="open-link" title="Open the paper's page in a new tab">Open link</button><button id="shot" title="Replace the screenshot with the page you are on now">Retake screenshot</button><button id="paste-shot" title="Click, then press ⌘V / Ctrl+V to paste an image">Paste screenshot</button><button id="rm-shot" class="danger">Remove screenshot</button></div>
+   <div id="shot-view" class="shot"></div>
+   <details id="bib-wrap" class="bibd"><summary id="bib-sum">＋ Add BibTeX</summary><div id="bib-box"></div></details>
+  </div>
+  <div class="shots-head"><span>Screenshots</span><button id="paste-pic" title="Click, then press ⌘V / Ctrl+V">📋 Paste screenshot</button></div>
+  <div id="pics" class="pics"><p class="small">Copy a screenshot (⌘⇧⌃4 on a Mac), then press ⌘V anywhere in this panel.</p></div>
+  <label for="text">Notes <span class="small">(one thought per line)</span></label>
+  <textarea id="text" placeholder="Why it matters&#10;First experiment&#10;Who could help"></textarea>
+  <div class="row"><button id="grab" title="Add the text highlighted on the current web page">Insert highlighted text</button><button id="show" title="Open the Station and fly to this astronaut">Show on Station</button><button id="del" class="danger">Delete</button></div>
+  <p id="meta" class="small"></p>
+ </section>
+
+
+</div>
+<script src="library.js"></script><script src="sync.js"></script><script src="bibtex.js"></script><script src="panel.js"></script>
+</body></html>

@@ -131,7 +131,7 @@ function render(){
  for(const g of all){
   if(g.id===OUT&&!g.entries.length&&all.length>1)continue;
   const filtered=q||tagFilter;
-  const shown=g.entries.filter(r=>(!q||[r.keyword,r.tags,r.notes,g.title].join(' ').toLowerCase().includes(q))&&(!tagFilter||tagsOf(r).some(t=>t.toLowerCase()===tagFilter)));
+  const shown=g.entries.filter(r=>(!q||[r.keyword,r.tags,r.notes,r.link,r.bibtex,g.title].join(' ').toLowerCase().includes(q))&&(!tagFilter||tagsOf(r).some(t=>t.toLowerCase()===tagFilter)));
   if(filtered&&!shown.length)continue;
   const box=document.createElement('div');box.className='house';
   const head=document.createElement('div');head.className='head';
@@ -165,6 +165,8 @@ function entryEl(r,g){
  const el=document.createElement('div');el.className='entry';el.dataset.id=r.id;
  el.append(field(r,'keyword','Idea'),field(r,'tags','Tags · comma separated',{after:inp=>{const row=live(r),v=cleanTags(inp.value);if(v)row.tags=v;else delete row.tags;edited();}}),
   field(r,'notes','Notes · one thought per line',{area:true,cls:'notes',max:5000}));
+ if(r.paper)el.append(paperEl(r));
+ if(r.images?.length)el.append(picsEl(r));
  // tag chips + summary
  const meta=document.createElement('div');meta.className='meta tagpick';const tags=tagsOf(r),links=linksOf(r),n=(r.notes||'').split(/\r?\n/).filter(l=>l.trim()).length;
  for(const t of tags)meta.append(tagEl(t,null,tagFilter===t.toLowerCase(),()=>{tagFilter=tagFilter===t.toLowerCase()?null:t.toLowerCase();render();}));
@@ -188,6 +190,50 @@ function entryEl(r,g){
    for(const o of data.rows)if(Array.isArray(o.links)&&o.links.includes(r.id)){o.links=o.links.filter(i=>i!==r.id);if(!o.links.length)delete o.links;}
    data.rows=data.rows.filter(x=>x.id!==r.id);edited();render();}));
  tools.lastChild.classList.add('danger');el.append(tools);return el;
+}
+
+// ---------- papers (captured in the side panel): link, screenshot, BibTeX ----------
+const shots=new Map(); // screenshot path → Promise of an object URL (files are immutable, so cache them)
+function paperEl(r){
+ const box=document.createElement('div');box.className='paper';
+ // link
+ const lr=document.createElement('label');lr.textContent='📄 Paper link';const row=document.createElement('div');row.className='paper-link';
+ const inp=document.createElement('input');inp.type='url';inp.maxLength=2000;inp.value=r.link||'';inp.disabled=locked();inp.dataset.key=r.id+':link';inp.placeholder='https://…';
+ const a=document.createElement('a');a.textContent='Open ↗';a.target='_blank';a.rel='noopener';const setA=v=>{a.hidden=!v;a.href=v||'#';};setA(r.link);
+ inp.oninput=()=>{const v=inp.value.trim();if(v&&!/^https?:\/\//i.test(v)){tell('Links must start with http:// or https://');return;}live(r).link=v;setA(v);edited();};
+ row.append(inp,a);lr.append(row);box.append(lr);
+ // screenshot
+ const shot=document.createElement('div');shot.className='shot';
+ if(!r.screenshot)shot.textContent='No screenshot. Take one from the side panel (Retake screenshot).';
+ else if(!dir)shot.textContent='Screenshot: '+r.screenshot+' (open the folder to see it)';
+ else{
+  const img=new Image();img.alt='Screenshot of '+label(r);img.title='Click to open full size';shot.append(img);
+  if(!shots.has(r.screenshot))shots.set(r.screenshot,Library.image(dir,r.screenshot).then(b=>URL.createObjectURL(b)).catch(e=>{shots.delete(r.screenshot);throw e;}));
+  shots.get(r.screenshot).then(u=>{img.src=u;img.onclick=()=>window.open(u,'_blank');}).catch(()=>{shot.textContent='Screenshot file not found yet. It may still be syncing.';});
+  const rm=document.createElement('button');rm.textContent='Remove screenshot';rm.className='danger';rm.style.marginTop='6px';rm.disabled=locked();
+  rm.onclick=()=>{if(!confirm('Remove the screenshot from "'+label(r)+'"?'))return;live(r).screenshot='';edited();render();};shot.append(rm);
+ }
+ box.append(shot);
+ // BibTeX (optional)
+ const d=document.createElement('details');d.className='bibd';d.open=!!r.bibtex;const s=document.createElement('summary');s.textContent=r.bibtex?'BibTeX ✓':'＋ Add BibTeX';
+ const bib=Bib.field(r,{disabled:locked(),tell,onEdit:v=>{const x=live(r);if(v.trim())x.bibtex=v;else delete x.bibtex;s.textContent=x.bibtex?'BibTeX ✓':'＋ Add BibTeX';edited();}});
+ bib.querySelector('textarea').dataset.key=r.id+':bibtex';
+ d.append(s,bib);box.append(d);
+ return box;
+}
+
+// Screenshots pasted in the side panel (any idea). Click to enlarge, × to remove.
+function picsEl(r){
+ const box=document.createElement('div');box.className='pics';
+ for(const path of r.images){
+  const fig=document.createElement('div');fig.className='pic';const img=new Image();img.alt='Screenshot of '+label(r);img.title='Click to open full size';fig.append(img);
+  if(dir){if(!shots.has(path))shots.set(path,Library.image(dir,path).then(b=>URL.createObjectURL(b)).catch(e=>{shots.delete(path);throw e;}));
+   shots.get(path).then(u=>{img.src=u;img.onclick=()=>window.open(u,'_blank');}).catch(()=>{img.alt='Not found yet (still syncing?)';});}
+  const rm=document.createElement('button');rm.textContent='×';rm.title='Remove this screenshot';rm.className='danger';rm.disabled=locked();
+  rm.onclick=()=>{if(!confirm('Remove this screenshot from "'+label(r)+'"?'))return;const x=live(r);x.images=(x.images||[]).filter(p=>p!==path);if(!x.images.length)delete x.images;edited();render();};
+  fig.append(rm);box.append(fig);
+ }
+ return box;
 }
 
 function renderConflicts(){

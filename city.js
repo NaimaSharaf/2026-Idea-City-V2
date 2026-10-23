@@ -19,7 +19,7 @@ let camTouched=false,hoverP=null,cam={x:0,y:0,z:1},tool='select',selected=null,h
 const tell=m=>$('status').textContent=m;
 const key=(x,y)=>x+','+y;
 const hash=s=>{let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
-const nameOf=r=>(r.keyword||'Untitled idea').trim()||'Untitled idea';
+const nameOf=r=>(r.paper?'📄 ':'')+((r.keyword||'Untitled idea').trim()||'Untitled idea');
 function tagsOf(r){const seen=new Set(),out=[];for(const t of String(r?.tags||'').split(',')){const s=t.trim();if(s&&!seen.has(s.toLowerCase())){seen.add(s.toLowerCase());out.push(s);}}return out;}
 const tagColor=t=>TAGCOLORS[hash(t.toLowerCase())%TAGCOLORS.length];
 const hasTag=(p,t)=>tagsOf(p.row).some(x=>x.toLowerCase()===t);

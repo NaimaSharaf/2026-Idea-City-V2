@@ -1,4 +1,4 @@
-# Idea City 1.0
+# Idea City 1.1
 
 A Chrome extension for a library of ideas, built from Presentation City. One page holds both views:
 
@@ -9,8 +9,23 @@ Switch with the **Entries | Station** toggle at the top, **View on Station →**
 
 ## Install
 1. Go to chrome://extensions, turn on Developer mode, click **Load unpacked**, and choose this folder.
-2. Click the Idea City icon. The page opens on Entries.
+2. Click the Idea City icon to open the **side panel**. Right-click the icon for **Open Idea City viewer** or **Open Idea City Station** (or use the buttons in the panel).
 3. Click **Open library folder** and choose a new, empty folder (for example `Ideas`). Idea City keeps its own folder; it refuses your Citations and Presentations libraries so they never mix.
+
+## Side panel
+Works like the Overleaf Synced Library capture panel: a compact editor for one idea at a time, next to whatever page you are reading.
+- **Choose library folder** (or **Reconnect**): the same folder as the viewer and Station; choosing it in one place switches all of them.
+- **Current idea**: ideas grouped by module. **＋ New** starts an idea in the module chosen below.
+- **Idea, Module, Tags, Notes**: edits sync automatically (within about a second) with the viewer and the Station.
+- **Insert highlighted text**: adds the text you highlighted on the current web page. The first time on a new site Chrome asks for access to it.
+- **Show on Station** opens the Station and flies to that astronaut. **Add a module** docks a new module.
+- Links between ideas are made in the viewer.
+
+### Papers
+- **📄 Add paper from this page**: on a paper's web page, saves an idea with the page title, its link and a screenshot of what's visible (stored in `images/` in the library folder). It gets the tag `paper` and a 📄 on the Station. The first time, Chrome asks for access to all sites; that's what its screenshot feature needs.
+- **Retake screenshot** replaces it with the page you're on now; **Paste screenshot** (click, then ⌘V) uses your own; **Remove screenshot** clears it.
+- **＋ Add BibTeX**: paste a BibTeX entry to get a citation (Last, F. et al., (year). PMID: n) with **Copy citation**. Same format as the Overleaf Synced Library (`bibtex.js` is a copy).
+- The Entries view shows each paper's link, screenshot (click to enlarge) and BibTeX too.
 
 ## Entries
 Each idea has:
